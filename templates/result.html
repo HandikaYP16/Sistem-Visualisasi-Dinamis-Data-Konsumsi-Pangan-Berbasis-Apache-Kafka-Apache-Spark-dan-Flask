@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Visualisasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        .year-section {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+        }
+        .year-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4CAF50;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #e8f5e9;
+            border-radius: 5px;
+        }
+        .chart-container {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .chart {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .chart img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .chart-title {
+            font-size: 16px;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        a {
+            display: inline-block;
+            margin: 20px 0;
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        function toggleCharts(year) {
+            const chartContainer = document.getElementById(`charts-${year}`);
+            if (chartContainer.style.display === "none" || chartContainer.style.display === "") {
+                chartContainer.style.display = "grid";
+            } else {
+                chartContainer.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Hasil Visualisasi Data Pangan Provinsi {{ provinsi }}</h1>
+    <div class="container">
+        {% if pie_charts_by_year %}
+            {% for year, charts in pie_charts_by_year.items() %}
+                <div class="year-section">
+                    <div class="year-title" onclick="toggleCharts('{{ year }}')">
+                        <span>Tahun {{ year }}</span>
+                        <span>&#x25BC;</span>
+                    </div>
+                    <div class="chart-container" id="charts-{{ year }}">
+                        {% for chart in charts %}
+                            <div class="chart">
+                                <div class="chart-title">{{ chart.title }}</div>
+                                <img src="data:image/png;base64,{{ chart.url }}" alt="Pie Chart">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Tidak ada data yang cocok dengan filter.</p>
+        {% endif %}
+        <a href="/">Kembali ke Halaman Utama</a>
+    </div>
+</body>
+</html>
+

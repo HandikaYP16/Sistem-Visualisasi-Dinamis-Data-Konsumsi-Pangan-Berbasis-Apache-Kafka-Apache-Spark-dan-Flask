@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Data Pangan - Sistem Visualisasi Konsumsi Pangan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9fc;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        header h2 {
+            margin: 10px 0 0;
+            font-size: 18px;
+            font-weight: normal;
+            opacity: 0.8;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 140px);
+            padding: 20px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+        .form-container h1 {
+            color: #4CAF50;
+            margin-bottom: 25px;
+            font-size: 22px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            display: block;
+        }
+        select, button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            outline: none;
+            box-sizing: border-box;
+        }
+        select:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 4px rgba(76, 175, 80, 0.5);
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s;
+        }
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.02);
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 14px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        }
+        footer a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sistem Visualisasi Konsumsi Pangan</h1>
+        <h2>Filter dan Visualisasikan Data Pangan dengan Mudah</h2>
+    </header>
+    <main>
+        <div class="form-container">
+            <h1>Pilih Data yang Anda Inginkan</h1>
+            <form method="post" action="/filter">
+                <label for="provinsi">Provinsi:</label>
+                <select id="provinsi" name="provinsi">
+                    <option value="">Pilih Provinsi</option>
+                    {% for provinsi in provinsi_list %}
+                        <option value="{{ provinsi }}">{{ provinsi }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Filter Data</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        &copy; 2024 Sistem Visualisasi Konsumsi Pangan. Dibuat dengan <a href="#">cinta dan dedikasi</a>.
+    </footer>
+</body>
+</html>
+
